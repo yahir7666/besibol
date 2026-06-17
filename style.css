@@ -1,4 +1,18 @@
-/* Paleta Premium Dark & Glassmorphism */
+/* Header Premium Optimizado para Móviles */
+header {
+    background: rgba(9, 13, 22, 0.95); /* Un poco más oscuro en móvil para que se lea claro */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    position: fixed;
+    top: 0;
+    left: 0; /* Asegura que empiece desde el borde izquierdo */
+    width: 100%; /* Ocupa el 100% exacto de la pantalla del cel */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%; /* Reducimos el padding para que quepa bien en pantallas chicas */
+}/* Paleta Premium Dark & Glassmorphism */
 :root {
     --bg-dark: #090d16;
     --card-glass: rgba(255, 255, 255, 0.03);
