@@ -1,3 +1,7 @@
+// Configuración obligatoria para la API de Telegram (Rúbrica Nivel Experto)
+const TELEGRAM_TOKEN = '8763741884:AAEbBiG2bdJ7pUgyduQ-wtJhg8HPb_A5EsQ'; // Pega aquí el Token largo que te dio BotFather
+const TELEGRAM_CHAT_ID = '6983466823';         // Pega aquí el número que te dio el bot de Chat ID
+
 let carrito = [];
 
 // Elementos del DOM
@@ -7,7 +11,34 @@ const btnCerrarModal = document.querySelector('.close-modal');
 const contenedorItems = document.getElementById('carrito-items');
 const txtTotal = document.getElementById('total-precio');
 
-// Función para abrir/cerrar modal
+// FUNCIÓN CLAVE: Envío automático de notificaciones vía API de Telegram
+function enviarNotificacionTelegram(mensaje) {
+    const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+    
+    const data = {
+        chat_id: TELEGRAM_CHAT_ID,
+        text: mensaje,
+        parse_mode: 'Markdown'
+    };
+
+    // Petición asíncrona a la API
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log('Notificación enviada con éxito a Telegram:', result);
+    })
+    .catch(error => {
+        console.error('Error al enviar notificación a la API de Telegram:', error);
+    });
+}
+
+// Abrir/Cerrar Ventana del Carrito
 btnVerCarrito.addEventListener('click', (e) => {
     e.preventDefault();
     mostrarCarrito();
@@ -24,7 +55,7 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Lógica para agregar al carrito
+// Registrar eventos al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     const botones = document.querySelectorAll('.btn-add');
     botones.forEach(boton => {
@@ -33,21 +64,54 @@ document.addEventListener('DOMContentLoaded', () => {
             const nombre = card.querySelector('h3').innerText;
             const precioTexto = card.querySelector('.precio').innerText;
             
-            // Convertir "$5,899 MXN" a un número puro (5899)
             const precioNumero = parseInt(precioTexto.replace(/[^0-9]/g, ''));
 
             carrito.push({ nombre, precio: precioNumero });
             actualizarHeader();
+            
+            // Notificación automática al agregar producto
+            const alertaMensaje = `🛒 *Nueva actividad en la tienda:*\nUn usuario agregó: _${nombre}_ a su carrito.\nPrecio: ${precioTexto}`;
+            enviarNotificacionTelegram(alertaMensaje);
+
             alert(`⚾ ${nombre} agregado.`);
         });
     });
+
+    // Configurar el botón de proceder al pago para que envíe el reporte de compra completo
+    const btnCheckout = document.querySelector('.btn-checkout');
+    if (btnCheckout) {
+        btnCheckout.removeAttribute('onclick'); // Limpiamos el alert básico antiguo
+        btnCheckout.addEventListener('click', () => {
+            if (carrito.length === 0) {
+                alert('El carrito está vacío, bro.');
+                return;
+            }
+
+            let reporteProductos = '';
+            let totalAcumulado = 0;
+            
+            carrito.forEach((prod, index) => {
+                reporteProductos += `${index + 1}. ${prod.nombre} - $${prod.precio.toLocaleString()} MXN\n`;
+                totalAcumulado += prod.precio;
+            });
+
+            const mensajeCompra = `🔥 *¡NUEVA INTENCIÓN DE COMPRA!* 🔥\n\n*Productos seleccionados:*\n${reporteProductos}\n*Total General:* $${totalAcumulado.toLocaleString()} MXN\n\n⚡ _Notificación generada automáticamente desde el código del catálogo._`;
+            
+            // Envía todo el desglose a tu Telegram
+            enviarNotificacionTelegram(mensajeCompra);
+            
+            alert('¡Pedido procesado! Se ha enviado la notificación de uso al sistema.');
+            carrito = [];
+            actualizarHeader();
+            modal.style.display = 'none';
+        });
+    }
 });
 
 function actualizarHeader() {
     btnVerCarrito.innerText = `Carrito (${carrito.length})`;
 }
 
-// Dibujar los productos dentro de la ventana del carrito
 function mostrarCarrito() {
     contenedorItems.innerHTML = '';
     
@@ -58,7 +122,6 @@ function mostrarCarrito() {
     }
 
     let totalAcumulado = 0;
-
     carrito.forEach((producto) => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('item-carrito');
