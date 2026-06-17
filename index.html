@@ -1,52 +1,42 @@
-<!-- Sección del Catálogo -->
-    <section class="catalogo-container">
-        <h2 class="section-title">Equipamiento Destacado</h2>
-        
-        <div class="productos-grid">
-            
-            <!-- Producto 1: Guante Rawlings -->
-            <div class="producto-card">
-                <div class="badge">Pro Axle</div>
-                <img src="https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?q=80&w=500" alt="Guante Rawlings">
-                <div class="producto-info">
-                    <span class="marca">Rawlings</span>
-                    <h3>Guante Rawlings Pro Preferred</h3>
-                    <p class="descripcion-corta">Cuero de calidad premium, ideal para el cuadro interior. Máximo confort y durabilidad.</p>
-                    <div class="precio-fila">
-                        <span class="precio">$5,899 MXN</span>
-                        <a href="#" class="btn-add">Agregar</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamondbacks | Pro Baseball Gear</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">DIAMONDBACKS ⚾</div>
+        <nav>
+            <a href="#">Catálogo</a>
+            <a href="#" class="btn-nav">Mi Carrito</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Equípate para Ganar</h1>
+        </section>
+
+        <section class="catalogo-container">
+            <h2 class="section-title">Nuestra Selección Premium</h2>
+            <div class="productos-grid" id="catalogo">
+                <!-- AQUÍ VAN LOS PRODUCTOS. REPITE ESTE BLOQUE 30 VECES -->
+                <div class="producto-card">
+                    <img src="https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=500" alt="Producto">
+                    <div class="producto-info">
+                        <span class="marca">Rawlings</span>
+                        <h3>Guante Pro Preferred #1</h3>
+                        <p class="precio">$5,899 MXN</p>
+                        <button class="btn-add">Agregar</button>
                     </div>
                 </div>
+                <!-- Repite el bloque de arriba cambiando el nombre y la foto -->
             </div>
-
-            <!-- Producto 2: Bate Louisville -->
-            <div class="producto-card">
-                <div class="badge">Más Vendido</div>
-                <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=500" alt="Bate Louisville">
-                <div class="producto-info">
-                    <span class="marca">Louisville Slugger</span>
-                    <h3>Bate de Madera MLB Prime</h3>
-                    <p class="descripcion-corta">Madera de maple seleccionado con acabado de espejo. Diseñado para un swing con máximo poder.</p>
-                    <div class="precio-fila">
-                        <span class="precio">$3,499 MXN</span>
-                        <a href="#" class="btn-add">Agregar</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 3: Guantes de Bateo -->
-            <div class="producto-card">
-                <img src="https://images.unsplash.com/photo-1544045560-7297ff6a020b?q=80&w=500" alt="Accesorios">
-                <div class="producto-info">
-                    <span class="marca">Rawlings</span>
-                    <h3>Guanteletas Workhorse Pro</h3>
-                    <p class="descripcion-corta">Agarre superior en el mango y protección reforzada en la palma para evitar ampollas.</p>
-                    <div class="precio-fila">
-                        <span class="precio">$899 MXN</span>
-                        <a href="#" class="btn-add">Agregar</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
+        </section>
+    </main>
+</body>
+</html>
