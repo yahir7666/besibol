@@ -1,4 +1,14 @@
 /* Header Premium Optimizado para Móviles */
+.hero {
+    height: 50vh;
+    background: linear-gradient(180deg, rgba(9,13,22,0.4) 0%, var(--bg-dark) 100%), 
+                url('https://images.unsplash.com/photo-1544045560-7297ff6a020b?w=1920') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 120px; /* Aumentamos el espacio para que el menú no tape el texto en el cel */
+}
 header {
     background: rgba(9, 13, 22, 0.95); /* Un poco más oscuro en móvil para que se lea claro */
     backdrop-filter: blur(12px);
