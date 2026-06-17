@@ -1,4 +1,12 @@
 /* Header Premium Optimizado para Móviles */
+header {
+    /* ... todo lo demás se queda igual ... */
+    position: absolute; /* Cambia fixed por absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
 .hero {
     height: 50vh;
     background: linear-gradient(180deg, rgba(9,13,22,0.4) 0%, var(--bg-dark) 100%), 
